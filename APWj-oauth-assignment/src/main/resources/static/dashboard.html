@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h2>User Dashboard</h2>
+    <p>Status: <span style="color: green; font-weight: bold;">Authenticated</span></p>
+    <hr>
+    <div style="text-align: left; margin-bottom: 20px;">
+        <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+    </div>
+
+    <form action="/logout" method="post">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+</div>
+
+<script>
+    fetch('/api/user/me')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('userName').innerText = data.name;
+            document.getElementById('userEmail').innerText = data.email;
+        });
+</script>
+</body>
+</html>
